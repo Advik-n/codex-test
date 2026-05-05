@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #4F46E5;
+  --accent-light: #EEF2FF;
+  --base: #FAFAFA;
+  --heading: #18181B;
+  --body: #52525B;
+  --muted: #A1A1AA;
+}
+
+body {
+  background: var(--base);
+  color: var(--body);
+}
+
+.shadow-subtle { box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+.rounded-xl { border-radius: 0.75rem; }
