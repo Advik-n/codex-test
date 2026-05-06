@@ -1,0 +1,32 @@
+// Extracted from app/members/page.tsx
+// "first part" where ANVESHAN logo slowly disappears on scroll
+
+const reduce = useReducedMotion();
+const heroRef = useRef<HTMLDivElement>(null);
+const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+const smooth = useSpring(scrollYProgress, { stiffness: 40, damping: 15 });
+const opacity = useTransform(smooth, [0, 1], [1, reduce ? 1 : 0]);
+const scale = useTransform(smooth, [0, 1], [1, reduce ? 1 : 0.95]);
+const blur = useTransform(smooth, [0, 1], ['blur(0px)', reduce ? 'blur(0px)' : 'blur(4px)']);
+const spacing = useTransform(smooth, [0, 1], ['0.18em', reduce ? '0.18em' : '0.02em']);
+
+<section ref={heroRef} className="h-[200vh]">
+  <div className="sticky top-0 flex h-screen items-center justify-center px-6">
+    <motion.div style={{ opacity, scale, filter: blur }} className="text-center max-w-6xl">
+      <motion.h1
+        style={{ letterSpacing: spacing }}
+        className="text-7xl sm:text-8xl font-black text-[var(--heading)]"
+      >
+        ANVESHAN
+      </motion.h1>
+      <p className="mt-6 text-xl">Members Portal · AI/ML Student Club Showcase</p>
+      <motion.div
+        className="mt-12 text-4xl text-[var(--accent)]"
+        animate={{ y:[0,10,0] }}
+        transition={{ repeat: Infinity, duration: 1.2 }}
+      >
+        {'{ }'}
+      </motion.div>
+    </motion.div>
+  </div>
+</section>
